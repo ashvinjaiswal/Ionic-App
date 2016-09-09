@@ -36,6 +36,9 @@ $ionicConfigProvider.tabs.style("standard"); //Makes them all look the same acro
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
+  // setup the token interceptor
+  $httpProvider.interceptors.push('TokenInterceptor');
+
   $stateProvider
 
   // setup an abstract state for the tabs directive

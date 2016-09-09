@@ -1,0 +1,37 @@
+<ion-view hide-nav-bar="true">
+        <ion-content>
+        <div class="row signup-text">
+        	<div class="col col-20 col-offset-80">sign up</div>
+        </div>
+        <div class="row welcome-logo">
+        	<div class="col col-20"></div>
+        	<div class="col col-60">
+        		<img src="img/welcome_logo.png" width="100%">
+        	</div>
+        	<div class="col col-20"></div>
+        </div>
+        <div class="row login-input-box-wrap">
+        	<div class="col col-10"></div>
+        	<div class="col col-80">
+        		<div class="list">
+		            <label class="item item-input login-input-box">
+		              <input type="email" ng-model="user.email" placeholder="email">
+		            </label>
+		            <label class="item item-input login-input-box">
+		              <input type="password" ng-model="user.password" placeholder="password">
+		            </label>
+          		</div>
+                <div>
+                    <button class="button button-block button-positive" ng-disabled="!user.email || !user.password" ng-click="signIn()">
+                      Login
+                    </button>
+
+                    <p class="text-center forgot-password">
+                      <a class="forget-password-text">forgot password?</a>
+                    </p>
+                </div>
+        	</div>
+        	<div class="col col-10"></div>
+         </div>
+        </ion-content>
+</ion-view>

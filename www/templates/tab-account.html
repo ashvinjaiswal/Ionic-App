@@ -1,0 +1,81 @@
+<ion-view view-title="me">
+  <ion-content class="me">
+    <div class="row">
+    	<div class="col col-15"></div>
+    	<div class="col col-70" style="text-align: center;border-bottom: 1px solid #ccc">
+            <div class="profile-pic-wrapper">                
+                <img src="img/profilepic.png">                
+            </div>
+    		
+    		<br>
+    		<label class="icon-edit profile-text"> lucymayer29@gmail.com</label>
+    		<br>
+    		<label class="profile-text">***********</label>
+    	</div>
+    	<div class="col col-15"></div>
+    </div>
+    <div class="mymoodwrap">
+    	<span class="icon-camera icon-camera-size"></span>
+	    	<div class="mymood-innnerwrap">
+	    		<h3 class="h3-custom">my moods</h3>
+				 <p style="color: #7b9caf">take selfies of each mood</p>
+	    	</div>	
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="row" style="text-align: center;position: relative;">
+        <div class="col col-10"></div>      
+    	<div class="col col-20">
+         <span class="icon-camera mood-border mood-icon"></span> 
+        </div>
+    	<div class="col col-20">
+         <span class="icon-camera mood-border mood-icon"></span> 
+        </div>
+        <div class="col col-20">
+         <span class="icon-camera mood-border mood-icon"></span> 
+        </div>
+        <div class="col col-20">
+         <span class="icon-camera mood-border mood-icon"></span> 
+        </div>
+        <div class="col col-10"></div>
+    </div>
+    <div class="row" style="text-align: center;position: relative;">
+        <div class="col col-10"></div>
+        <div ng-repeat="moodItem in firstRowMood" class="col col-20 mood-icon">{{moodItem.mood}}</div>
+
+        <!-- <div class="col col-20 mood-icon">Happy</div>
+        <div class="col col-20 mood-icon">Sad</div>
+        <div class="col col-20 mood-icon">Angry</div>
+        <div class="col col-20 mood-icon">Scared</div> -->
+        <div class="col col-10"></div>
+    </div>
+    <br>
+     <div class="row" style="text-align: center;">
+        <div class="col col-10"></div>
+    	<div class="col col-20">
+         <span class="icon-camera mood-border mood-icon"></span> 
+        </div>
+        <div class="col col-20">
+         <span class="icon-camera mood-border mood-icon"></span> 
+        </div>
+        <div class="col col-20">
+         <span class="icon-camera mood-border mood-icon"></span> 
+        </div>
+        <div class="col col-20">
+         <span class="icon-camera mood-border mood-icon"></span> 
+        </div>
+        <div class="col col-10"></div>
+    </div>
+    <div class="row" style="text-align: center;position: relative;">
+        <div class="col col-10"></div>
+        <div ng-repeat="moodItem in secondRowMood" class="col col-20 mood-icon">{{moodItem.mood}}</div>
+        <!-- <div class="col col-20 mood-icon">Content</div>
+        <div class="col col-20 mood-icon">Tired</div>
+        <div class="col col-20 mood-icon">Annoyed</div>
+        <div class="col col-20 mood-icon">Empty</div> -->
+        <div class="col col-10"></div>
+    </div>
+    </div>
+  </ion-content>
+</ion-view>

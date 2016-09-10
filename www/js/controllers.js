@@ -85,6 +85,7 @@ angular.module('starter.controllers', [])
 
 
 .controller('AccountCtrl', function($scope,$state,UserFactory,Loader) {
+    
       
       //get the user moods from the server
       UserFactory.user_dashboard().success(function(data) {
@@ -102,6 +103,11 @@ angular.module('starter.controllers', [])
           Loader.hideLoading();
           Loader.toggleLoadingWithMessage(err.message);
       });
+
+      $scope.logout = function(){
+        UserFactory.logout();
+        $state.go('login');
+      }
 
       //check the user selection
       $scope.setMood = function(moodId) {

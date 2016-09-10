@@ -84,6 +84,18 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active, ion-tabs.tabs-col
 	font-size: 18px;
 }
 
+.logout-button-wrapper{
+  text-align: right;
+  position: absolute;
+  width: 100%;
+}
+.logout-button-wrapper .button.button-primary{
+  color:#5e7c8d;
+}
+.profile-outer-wrapper{
+  text-align: center;
+  border-bottom: 1px solid #ccc
+}
 .profile-pic-wrapper{
   position: relative;
   width: 200px;
@@ -110,6 +122,10 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active, ion-tabs.tabs-col
 	padding: 5px;
 	color: #cccccc;
 	font-size: 15px;
+}
+
+.profile-moods-icon-wrapper{
+  margin-top: 2.2em;
 }
 .h3-custom{
 	font-size: 22px;
@@ -248,6 +264,13 @@ li.slider-slide-tab {
 /*mood css*/
 .mood-wrapper{
 	text-align: center;
+}
+/*set the image heigh as per the viewport*/
+.mood-wrapper .item-image{
+  max-height: 69vh;
+}
+.mood-wrapper .item-image.schedule-time{
+  max-height: 67vh;
 }
 .mood-footer{
 	height: 200px;

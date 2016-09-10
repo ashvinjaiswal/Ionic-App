@@ -1,8 +1,11 @@
 <ion-view view-title="me">
   <ion-content class="me">
+    <div class="logout-button-wrapper">
+      <button class="button button-clear button-primary icon icon-logout " ng-click="logout()"></button>
+    </div>
     <div class="row">
-    	<div class="col col-15"></div>
-    	<div class="col col-70" style="text-align: center;border-bottom: 1px solid #ccc">
+        
+    	<div class="col profile-outer-wrapper">
             <div class="profile-pic-wrapper">                
                 <img src="img/profilepic.png">                
             </div>
@@ -12,7 +15,6 @@
     		<br>
     		<label class="profile-text">***********</label>
     	</div>
-    	<div class="col col-15"></div>
     </div>
     <div class="mymoodwrap">
     	<span class="icon-camera icon-camera-size"></span>
@@ -21,10 +23,7 @@
 				 <p style="color: #7b9caf">take selfies of each mood</p>
 	    	</div>	
     </div>
-    <br>
-    <br>
-    <br>
-    <div class="row" style="text-align: center;position: relative;">
+    <div class="row profile-moods-icon-wrapper" style="text-align: center;position: relative;">
         <div class="col col-10"></div>      
         <div class="col col-20" ng-repeat="moodItem in firstRowMood" >
          <!-- <span class="icon-camera mood-border mood-icon" ng-click="setMood({{moodItem.Id}})"></span>  -->

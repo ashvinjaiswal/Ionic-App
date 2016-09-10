@@ -96,7 +96,7 @@ $ionicConfigProvider.tabs.style("standard"); //Makes them all look the same acro
   .state('tab.setmood', {
     url: '/setmood',
     views: {
-      'tab-account': {
+      'tab-dash': {
         templateUrl: 'templates/tab-setmood.html',
         controller: 'SetMoodCtrl'
       }
@@ -105,7 +105,7 @@ $ionicConfigProvider.tabs.style("standard"); //Makes them all look the same acro
   .state('tab.setmood2', {
     url: '/setmood2',
     views: {
-      'tab-account': {
+      'tab-dash': {
         templateUrl: 'templates/tab-setmood2.html',
         controller: 'SetMood2Ctrl'
       }
@@ -114,7 +114,7 @@ $ionicConfigProvider.tabs.style("standard"); //Makes them all look the same acro
   .state('tab.setmood3', {
     url: '/setmood3',
     views: {
-      'tab-account': {
+      'tab-dash': {
         templateUrl: 'templates/tab-setmood3.html',
         controller: 'SetMood3Ctrl'
       }

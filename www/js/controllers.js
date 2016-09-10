@@ -2,9 +2,10 @@ angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope,$state,UserFactory) {
 
-  //  $scope.signIn = function(user) {
-  //   $state.go('tab.setmood');
-  // };
+   $scope.setUserMood = function() {
+    console.log("mood is clicked");
+    $state.go('tab.setmood');
+  };
 
 
 
@@ -73,10 +74,10 @@ angular.module('starter.controllers', [])
   };
   
 })
-.controller('SetMood3Ctrl', function($scope, $state) {  
-  
+.controller('SetMood3Ctrl', function($scope, $state) {
   $scope.save = function(user) {
-    $state.go('tab.setmood4');
+    $state.go('tab.dash',{}, {reload: true});
+
   };
   
 })

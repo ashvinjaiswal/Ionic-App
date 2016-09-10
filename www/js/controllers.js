@@ -11,19 +11,14 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('ChatsCtrl', function($scope, Chats) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
-
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  };
+.controller('ChallengesCtrl', function($scope,$state, Chats) {
+  $scope.challengeDetail = function() {
+        $state.go('tab.chd');
+  }
+  $scope.challengeDetailComplete = function() {
+        $state.go('tab.ccd');
+  }
+  
 })
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
@@ -81,11 +76,16 @@ angular.module('starter.controllers', [])
   };
   
 })
-
+.controller('NavCtrl', function($scope, $state) {
+  $scope.dashboard = function() {
+    $state.go('tab.account',{}, {reload: true});
+  };
+  
+})
 
 
 .controller('AccountCtrl', function($scope,$state,UserFactory,Loader) {
-    
+
       
       //get the user moods from the server
       UserFactory.user_dashboard().success(function(data) {

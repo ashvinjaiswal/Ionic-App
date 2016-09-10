@@ -373,6 +373,9 @@ ul.wakeup-list li{
 	    margin-left: 20px;
 	    color: #34596f;
 }
+.item.item-divider.card_foot {
+  overflow: visible;
+}
 .chd .float_cir{
 	position: absolute;
 	z-index: 2;

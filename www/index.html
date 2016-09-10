@@ -33,11 +33,11 @@
     <!--
       The nav bar that will be updated as we navigate between views.
     -->
-    <ion-nav-bar class="bar-positive">
+    <ion-nav-bar class="bar-positive" ng-controller="NavCtrl">
       <ion-nav-back-button>
       </ion-nav-back-button>
       <ion-nav-buttons side="right">
-        <button class="button button-icon button-clear icon-go-home">
+        <button class="button button-icon button-clear icon-go-home" ng-click="dashboard()">
         </button>
       </ion-nav-buttons>
     </ion-nav-bar>

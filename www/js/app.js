@@ -70,7 +70,7 @@ $ionicConfigProvider.tabs.style("standard"); //Makes them all look the same acro
       views: {
         'tab-challenges': {
           templateUrl: 'templates/tab-challenges.html',
-          controller: 'ChatsCtrl'
+          controller: 'ChallengesCtrl'
         }
       }
     })

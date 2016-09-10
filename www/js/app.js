@@ -120,6 +120,24 @@ $ionicConfigProvider.tabs.style("standard"); //Makes them all look the same acro
       }
     }
   })
+
+    .state('tab.chd', {
+      url: '/chd',
+       views: {
+      'tab-challenges': {
+        templateUrl: 'templates/challenge-detail.html'
+      }
+    }
+  })
+    
+  .state('tab.ccd', {
+      url: '/ccd',
+       views: {
+      'tab-challenges': {
+        templateUrl: 'templates/challenge-complete-detail.html'
+      }
+    }
+  })
   
   .state('login', {
       url: '/login',

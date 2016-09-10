@@ -27,8 +27,9 @@
     <div class="row" style="text-align: center;position: relative;">
         <div class="col col-10"></div>      
         <div class="col col-20" ng-repeat="moodItem in firstRowMood" >
-         <span class="icon-camera mood-border mood-icon" ng-click="setMood({{moodItem.Id}})"></span> 
-         <span  ng-click="setMood({{moodItem.Id}})"> <img ng-src="{{moodItem.user_mood_picture}}"></span> 
+         <!-- <span class="icon-camera mood-border mood-icon" ng-click="setMood({{moodItem.Id}})"></span>  -->
+         <img class="img_dash" ng-click="setMood({{moodItem.Id}})" ng-src="{{moodItem.user_mood_picture}}" alt="" height="45px" width="45px">
+         <i class="icon icon-edit icon-edit-hover-small"></i> 
         </div>
     	<!-- <div class="col col-20">
          <span class="icon-camera mood-border mood-icon"></span> 

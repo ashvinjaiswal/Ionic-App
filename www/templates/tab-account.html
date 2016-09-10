@@ -26,7 +26,11 @@
     <br>
     <div class="row" style="text-align: center;position: relative;">
         <div class="col col-10"></div>      
-    	<div class="col col-20">
+        <div class="col col-20" ng-repeat="moodItem in firstRowMood" >
+         <span class="icon-camera mood-border mood-icon" ng-click="setMood({{moodItem.Id}})"></span> 
+         <span  ng-click="setMood({{moodItem.Id}})"> <img ng-src="{{moodItem.user_mood_picture}}"></span> 
+        </div>
+    	<!-- <div class="col col-20">
          <span class="icon-camera mood-border mood-icon"></span> 
         </div>
     	<div class="col col-20">
@@ -37,12 +41,12 @@
         </div>
         <div class="col col-20">
          <span class="icon-camera mood-border mood-icon"></span> 
-        </div>
+        </div> -->
         <div class="col col-10"></div>
     </div>
     <div class="row" style="text-align: center;position: relative;">
         <div class="col col-10"></div>
-        <div ng-repeat="moodItem in firstRowMood" class="col col-20 mood-icon">{{moodItem.mood}}</div>
+        <div ng-repeat="moodItem in firstRowMood" class="col col-20 mood-icon">{{moodItem.mood}} {{moodItem.Id}}</div>
 
         <!-- <div class="col col-20 mood-icon">Happy</div>
         <div class="col col-20 mood-icon">Sad</div>

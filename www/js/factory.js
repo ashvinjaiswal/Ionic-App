@@ -1,5 +1,7 @@
 //Base url for the api
-var base = 'http://moodee.ctc500.com/moodeeapi';
+//var base = 'http://moodee.ctc500.com/moodeeapi';
+var base = 'http://meanmentors.com/testapi/index.php/moodeeapi';
+
 //var base = 'https://ionic-book-store.herokuapp.com';
 angular.module('starter.factory', [])
 
@@ -152,14 +154,7 @@ angular.module('starter.factory', [])
         var UserAPI = {
 
             login: function(user) {
-                // return $http.post(base + '/user_login', user);
-                //return $http.post(base + '/login', user);
-                //return $http.post('http://meanmentors.com/php/api.php', user);
-                //return $http.post('http://meanmentors.com/api/index.php/example/users', user);
-                
-                return $http.post(base+'/user_login', user);
-                //return $http.post('http://moodee.wiseittechnologies.com/moodeeapi/user_login', user);
-
+                return $http.post(base + '/user_login', user);
             },
 
             user_dashboard: function() {

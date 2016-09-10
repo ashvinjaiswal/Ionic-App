@@ -30,20 +30,17 @@ angular.module('starter.controllers', [])
 })
 
 .controller('SignInCtrl', function($scope, $state,AuthFactory,UserFactory,Loader) {
-   $scope.user = {
-                email: '',
-                password: ''
-            };
-
-
-  
-  $scope.signIn = function() {
-      console.log($scope.user);
+    $scope.user = {
+        email: '',
+        password: ''
+    };
+    $scope.signIn = function() {
+      //console.log($scope.user);
+      //show loading indicator
       Loader.showLoading('Authenticating...');
-
       UserFactory.login($scope.user).success(function(data) {
+          //check the data from the console
           console.log(data);
-
           data = data.data[0];
           AuthFactory.setUser(data.email);
           AuthFactory.setToken({
@@ -52,7 +49,6 @@ angular.module('starter.controllers', [])
           UserFactory.setUserMoods({
             moods:data.moods
           });
-
           //hide the loading
           Loader.hideLoading();
           $state.go('tab.dash');
@@ -61,17 +57,7 @@ angular.module('starter.controllers', [])
           Loader.hideLoading();
           Loader.toggleLoadingWithMessage(err.message);
       });
-
-
-
-
-
-
-
-
-
-    
-  };
+    };
   
 })
 .controller('SetMoodCtrl', function($scope, $state) {  
@@ -97,14 +83,39 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('AccountCtrl', function($scope,$state,UserFactory) {
-  //get the user moods
-  var data = UserFactory.getUserMoods();
-  $scope.moods= data.moods;
-  $scope.firstRowMood= $scope.moods.slice(0,4);
-  $scope.secondRowMood= $scope.moods.slice(4,9);
+.controller('AccountCtrl', function($scope,$state,UserFactory,Loader) {
+      
+      //get the user moods from the server
+      UserFactory.user_dashboard().success(function(data) {
+          //get the dashboard data
+          
+          var resposeData = data.data[0];
+          console.log(resposeData);
+          $scope.moods = resposeData.userAllMoods;
+          $scope.firstRowMood= $scope.moods.slice(0,4);
+          $scope.secondRowMood= $scope.moods.slice(4,9);
 
-  //console.log($scope.moods);
-  //console.log($scope.firstRowMood);
-  //console.log($scope.secondRowMood);
+
+
+      }).error(function(err, statusCode) {
+          Loader.hideLoading();
+          Loader.toggleLoadingWithMessage(err.message);
+      });
+
+      //check the user selection
+      $scope.setMood = function(moodId) {
+        //console.log("test");
+        console.log(moodId);
+
+      };
+
+
+      // var data = UserFactory.getUserMoods();
+      // $scope.moods= data.moods;
+      // $scope.firstRowMood= $scope.moods.slice(0,4);
+      // $scope.secondRowMood= $scope.moods.slice(4,9);
+
+      //console.log($scope.moods);
+      //console.log($scope.firstRowMood);
+      //console.log($scope.secondRowMood);
 });

@@ -179,3 +179,37 @@ angular.module('starter.factory', [])
         return UserAPI;
     }
 ])
+
+.factory('UploadFactory', function($q) {
+
+return {
+   uploadPicture: function (moodId,imgURI, fileURL,$cordovaFileTransfer) {
+        var q = $q.defer();
+
+        function win(r) {
+            q.resolve(r.response);
+        }
+
+        function fail(e) {
+            q.reject(e);
+        }
+
+        var options = {
+            fileKey: "pic",
+            fileName: fileURL.substr(fileURL.lastIndexOf('/') + 1);,
+            chunkedMode: false,
+            mimeType: "image/jpg"
+        };
+
+        $cordovaFileTransfer.upload(base+'/dashboard_mood_upload/mood_id/'+moodId, fileURL, options)
+              .then(function(result) {
+                console.log(result);
+              }, function(err) {
+                console.log(err);
+              }, function (progress) {
+                console.log(progress);
+              });
+        return q.promise;
+    }
+  }
+})

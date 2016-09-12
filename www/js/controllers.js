@@ -118,4 +118,97 @@ angular.module('starter.controllers', [])
       //console.log($scope.moods);
       //console.log($scope.firstRowMood);
       //console.log($scope.secondRowMood);
+
+      // -----------Upload Code Starts--------------------
+
+
+        var images = [];
+        $scope.imageDatas = images;
+
+        $scope.data = { "ImageURI" :  "Select Image" };
+
+        $scope.takePicture = function() {
+          var options = {
+              quality: 50,
+              targetWidth: 300,
+              targetHeight: 300,
+              destinationType: Camera.DestinationType.FILE_URI,
+              sourceType: Camera.PictureSourceType.CAMERA
+            };
+          $cordovaCamera.getPicture(options).then(
+          function(imageData) {
+            $scope.picData = imageData;
+            images.push(imageData);
+            $scope.ftLoad = true;
+            window.localstorage.set('fotoUp', imageData);
+            $ionicLoading.show({template: 'loading photo', duration:500});
+            console.log($scope.data);
+          },
+          function(err){
+              $ionicLoading.show({template: 'EROOR IN GETTING', duration:500});
+          })
+        }
+
+        $scope.selectPicture = function() { 
+          var options = {
+            quality: 50,
+            targetWidth: 300,
+            targetHeight: 300,
+            destinationType: Camera.DestinationType.FILE_URI,
+            sourceType: Camera.PictureSourceType.PHOTOLIBRARY
+          };
+
+          $cordovaCamera.getPicture(options).then(
+          function(imageURL) {
+            window.resolveLocalFileSystemURL(imageURL, function(fileEntry) {
+              $scope.picData = fileEntry.nativeURL;
+              images.push(fileEntry.nativeURL);
+              $scope.ftLoad = true;
+              var image = document.getElementById('myImage');
+              image.src = fileEntry.nativeURL;
+              });
+            $ionicLoading.show({template: 'loading photo', duration:500});
+            console.log($scope.data);
+          },
+          function(err){
+            $ionicLoading.show({template: 'EROOR IN GETTING', duration:500});
+          })
+        };
+
+        
+
+        $scope.showActionsheet = function() {
+        
+        $ionicActionSheet.show({
+          titleText: 'Choose Upload Option',
+          buttons: [
+            { text: '<i class="icon ion-camera"></i> From Camera' },
+            { text: '<i class="icon ion-images"></i> From Gallery' },
+          ],
+          destructiveText: 'Delete',
+          cancelText: 'Cancel',
+          cancel: function() {
+            console.log('CANCELLED');
+          },
+          buttonClicked: function(index) {
+            console.log('BUTTON CLICKED', index);
+            return true;
+          },
+           buttonClicked: function(index) {
+                if(index === 0) {
+                   $scope.takePicture();
+                }
+            
+                if(index === 1) {
+                   $scope.selectPicture();
+                }
+             },
+          destructiveButtonClicked: function() {
+            console.log('DESTRUCT');
+            return true;
+          }
+        });
+      };
+      // -----------Upload Code Ends---------------------- 
+
 });

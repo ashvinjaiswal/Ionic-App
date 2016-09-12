@@ -2,7 +2,7 @@
   <ion-content class="challenges">
     <ion-slide-box show-pager="false" ion-slide-tabs>
       <ion-slide ion-slide-tab-label="Active">
-          <br> 
+         
           <div class="card active-card-light">
             <div class="row">
               <div class="col col-20 col-center icon-restart your-challenge-icon"></div>
@@ -15,9 +15,13 @@
             </div>
           </div>
           <br> 
-          <div class="card active-card-dark" ng-click="challengeDetail()">
+          <div class="card active-card-dark space" ng-repeat="challengeItem in challengeData.active" ng-click="challengeDetail(challengeItem)">
             <div class="row">
               <div class="col col-20 col-center icon-full-challenge new-challenge-icon">
+                <div ng-show="challengeItem.flag==1" class="challenge-badge">
+                  <i class="icon ion-ios-star"></i>
+                </div>
+                
               </div>
               <div class="col">
                 <!-- <span>resume work on</span>
@@ -29,21 +33,21 @@
               <div class="col col-10 col-center ion-chevron-right ion-chevron-right-size"></div>
             </div>
           </div>
-          <br>
-          <div class="card active-card-dark" ng-click="challengeDetail()">
+          
+          <!-- <div class="card active-card-dark space" ng-click="challengeDetail()">
             <div class="row">
               <div class="col col-20 col-center icon-full-challenge new-challenge-icon">
               </div>
               <div class="col">
-                <!-- <span>resume work on</span>
-                <br> -->
+                <span>resume work on</span>
+                <br>
                 <h3 class="h3-active-card-dark">new challenge</h3>
       
                 <span>08/21 @ 11:22am</span>
               </div>
               <div class="col col-10 col-center ion-chevron-right ion-chevron-right-size"></div>
             </div>
-          </div>
+          </div> -->
 
       </ion-slide>
       <ion-slide ion-slide-tab-label="Pending">

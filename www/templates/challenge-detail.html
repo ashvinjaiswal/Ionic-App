@@ -2,7 +2,7 @@
   <ion-content class="chd padding">
  <div class="card">
   <div class="item item-divider card_head">
-   <h1 class="h1_card_title">cook</h1>
+   <h1 class="h1_card_title">{{challengeData.title}}</h1>
   </div>
   <div class="item item-text-wrap">
  	<div class="list">
@@ -12,15 +12,16 @@
   		<a class="item" href="#">
     		<span class="num_cir">1</span>
     		Cook a Meal
-    		<p class="p_inner_card_subtitle">for more than 2 people</p>
+    		<p class="p_inner_card_subtitle">{{challengeData.directions}}</p>
     		
   		</a>
-  		<a class="item item-icon-right" href="#">
+  		<a class="item item-icon-right" href="#" ng-show={{challengeData.picturereq=='Y'}}>
     		<span class="num_cir">2</span>
     		Take a Picture
     		<p class="p_inner_card_subtitle">of your challenge</p>
+        <i class="icon icon-camera button button-small cam_ico"></i>
   		</a>
-<i class="icon icon-camera button button-small cam_ico"></i>
+      
  	</div>
   <br>
   <br>

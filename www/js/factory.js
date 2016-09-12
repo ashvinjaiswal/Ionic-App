@@ -170,6 +170,12 @@ angular.module('starter.factory', [])
             getUserMoods:function(){
                 return LSFactory.get('moods');    
             },
+            userChallengesData: function() {
+                return $http.get(base+'/user_challenges_data');
+            },
+            setUserChallengeFlag:function(flagData){
+                return $http.get(base+'/update_challenge_flag',flagData);
+            },
             logout: function() {
                 AuthFactory.deleteAuth();
             }

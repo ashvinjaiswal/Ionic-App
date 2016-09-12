@@ -258,10 +258,26 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active, ion-tabs.tabs-col
 	background-color: #345a70;
 	color: #7b9caf;
 }
+.challenges .active-card-dark.space{
+  margin-top: 1em;
+}
 .challenges .new-challenge-icon{
 	font-size: 45px;
 	color: #7b9caf;
+  position: relative;
 }
+.new-challenge-icon i.icon.ion-ios-star {
+    position: absolute;
+    top: 0;
+    left: 20%;
+    transform: translateX(-20%);
+    font-size: 0.3em;
+    color: white;
+    background: #ff6600;
+    padding: 0.14em;
+    border-radius: 100%;
+}
+
 .challenges .your-challenge-icon{
 	font-size: 45px;
 }
@@ -451,9 +467,9 @@ ul.wakeup-list li{
 	color: #34596f;
 	position: absolute;
     right: 10%;
-    top: 140px;
+    top: 0px;
     z-index: 2;
-    padding: 10px;
+    padding: 0px 20px;
 }
 .ccd .coach_button{
 	z-index: 2;

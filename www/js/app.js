@@ -123,9 +123,13 @@ $ionicConfigProvider.tabs.style("standard"); //Makes them all look the same acro
 
     .state('tab.chd', {
       url: '/chd',
+      params: {
+         obj: null
+       },
        views: {
       'tab-challenges': {
-        templateUrl: 'templates/challenge-detail.html'
+        templateUrl: 'templates/challenge-detail.html',
+        controller: 'ChallengeDetailCtrl'
       }
     }
   })

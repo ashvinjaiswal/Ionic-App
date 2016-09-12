@@ -11,13 +11,43 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('ChallengesCtrl', function($scope,$state, Chats) {
-  $scope.challengeDetail = function() {
-        $state.go('tab.chd');
+.controller('ChallengesCtrl', function($scope,$state, Chats,UserFactory) {
+
+  //get the data from the factory
+  UserFactory.userChallengesData().success(function(data) {
+          //get the dashboard data
+          console.log(data);
+          $scope.challengeData = data;
+
+
+      }).error(function(err, statusCode) {
+          Loader.hideLoading();
+          Loader.toggleLoadingWithMessage(err.message);
+      });
+
+
+
+  $scope.challengeDetail = function(challengeItem) {
+        //console.log(challengeItem);
+        //$state.go('tab.chd');
+
+        //set the view flag to 1 
+        //var flagData = {"":"","":""};
+
+
+        $state.go('tab.chd',{obj: challengeItem});
   }
   $scope.challengeDetailComplete = function() {
         $state.go('tab.ccd');
   }
+  
+})
+
+.controller('ChallengeDetailCtrl', function($scope,$state,$stateParams) {
+  $scope.challengeData = $state.params.obj;
+  //console.log($state.params.obj);
+
+  
   
 })
 
@@ -36,7 +66,7 @@ angular.module('starter.controllers', [])
       Loader.showLoading('Authenticating...');
       UserFactory.login($scope.user).success(function(data) {
           //check the data from the console
-          console.log(data);
+          //console.log(data);
           data = data.data[0];
           AuthFactory.setUser(data.email);
           AuthFactory.setToken({
@@ -92,7 +122,7 @@ angular.module('starter.controllers', [])
           //get the dashboard data
           
           var resposeData = data.data[0];
-          console.log(resposeData);
+          //console.log(resposeData);
           $scope.moods = resposeData.userAllMoods;
           $scope.firstRowMood= $scope.moods.slice(0,4);
           $scope.secondRowMood= $scope.moods.slice(4,9);

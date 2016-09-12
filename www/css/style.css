@@ -157,6 +157,59 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active, ion-tabs.tabs-col
 .me .mood-icon{
 	color: #34596f;
 }
+
+/* Mood Model style*/
+.modal-bg{
+  background: #dde3e7;
+}
+.mood-modal-wrapper{
+  position: relative;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+}
+.mood-modal-content{
+  margin-top: 50%;
+}
+
+.mood-modal-content h2{
+    margin-top: 0px;
+    color: #5e7c8d;
+    font-weight: bold;
+}
+.mood-modal-content p{
+    color: #5e7c8d;
+}
+.mood-modal-content i.icon.ion-plus-round {
+    padding: 5px;
+    font-size: 19px;
+    position: relative;
+    top: -16px;
+}
+.btn-modal-float{
+   position: absolute;
+    bottom: 3em;
+    width: 80px;
+    right: 16px;
+    height: 80px;
+    border-radius: 100%;
+    background: #ff6600;
+    padding-top: 19px;
+    text-decoration: none;
+    color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0, 0.12), 0 2px 4px rgba(0,0,0, 0.24);
+    text-align: center;
+
+}
+.btn-modal-float .icon-camera{
+  font-size: 10px;
+}
+/*Mood Model style end*/
+
+
+
 /*------tabs-challenges--------------*/
 
 .challenges h6 {

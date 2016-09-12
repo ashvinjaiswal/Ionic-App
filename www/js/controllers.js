@@ -84,7 +84,7 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('AccountCtrl', function($scope,$state,UserFactory,Loader) {
+.controller('AccountCtrl', function($scope,$state,$ionicModal,UserFactory,Loader) {
 
       
       //get the user moods from the server
@@ -116,13 +116,32 @@ angular.module('starter.controllers', [])
 
       };
 
+      // Ionic Model
+      $ionicModal.fromTemplateUrl('my-modal.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+      }).then(function(modal) {
+        $scope.modal = modal;
+      });
+      $scope.openSetMoodModal = function(moodItem) {
+        console.log(moodItem);
+        $scope.modal.show();
+        $scope.moodItem=moodItem;
+      };
+      $scope.closeSetMoodModal = function() {
+        $scope.modal.hide();
+      };
+      // Cleanup the modal when we're done with it!
+      $scope.$on('$destroy', function() {
+        $scope.modal.remove();
+      });
+      // Execute action on hide modal
+      $scope.$on('modal.hidden', function() {
+        // Execute action
+      });
+      // Execute action on remove modal
+      $scope.$on('modal.removed', function() {
+        // Execute action
+      });
 
-      // var data = UserFactory.getUserMoods();
-      // $scope.moods= data.moods;
-      // $scope.firstRowMood= $scope.moods.slice(0,4);
-      // $scope.secondRowMood= $scope.moods.slice(4,9);
-
-      //console.log($scope.moods);
-      //console.log($scope.firstRowMood);
-      //console.log($scope.secondRowMood);
 });

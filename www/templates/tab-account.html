@@ -9,7 +9,6 @@
             <div class="profile-pic-wrapper">                
                 <img src="img/profilepic.png">                
             </div>
-    		
     		<br>
     		<label class="icon-edit profile-text"> lucymayer29@gmail.com</label>
     		<br>
@@ -26,60 +25,58 @@
     <div class="row profile-moods-icon-wrapper" style="text-align: center;position: relative;">
         <div class="col col-10"></div>      
         <div class="col col-20" ng-repeat="moodItem in firstRowMood" >
-         <!-- <span class="icon-camera mood-border mood-icon" ng-click="setMood({{moodItem.Id}})"></span>  -->
-         <img class="img_dash" ng-click="setMood({{moodItem.Id}})" ng-src="{{moodItem.user_mood_picture}}" alt="" height="45px" width="45px">
+         <span ng-hide="moodItem.user_mood_picture"  class="icon-camera mood-border mood-icon" ng-click="openSetMoodModal(moodItem)"></span> 
+         <img class="img_dash" ng-show="moodItem.user_mood_picture"  ng-click="openSetMoodModal(moodItem)" ng-src="{{moodItem.user_mood_picture}}" alt="" height="45px" width="45px">
          <i class="icon icon-edit icon-edit-hover-small"></i> 
         </div>
-    	<!-- <div class="col col-20">
-         <span class="icon-camera mood-border mood-icon"></span> 
-        </div>
-    	<div class="col col-20">
-         <span class="icon-camera mood-border mood-icon"></span> 
-        </div>
-        <div class="col col-20">
-         <span class="icon-camera mood-border mood-icon"></span> 
-        </div>
-        <div class="col col-20">
-         <span class="icon-camera mood-border mood-icon"></span> 
-        </div> -->
         <div class="col col-10"></div>
     </div>
     <div class="row" style="text-align: center;position: relative;">
         <div class="col col-10"></div>
-        <div ng-repeat="moodItem in firstRowMood" class="col col-20 mood-icon">{{moodItem.mood}} {{moodItem.Id}}</div>
-
-        <!-- <div class="col col-20 mood-icon">Happy</div>
-        <div class="col col-20 mood-icon">Sad</div>
-        <div class="col col-20 mood-icon">Angry</div>
-        <div class="col col-20 mood-icon">Scared</div> -->
+        <div ng-repeat="moodItem in firstRowMood" class="col col-20 mood-icon">{{moodItem.mood}}</div>
         <div class="col col-10"></div>
     </div>
     <br>
      <div class="row" style="text-align: center;">
         <div class="col col-10"></div>
-    	<div class="col col-20">
-         <span class="icon-camera mood-border mood-icon"></span> 
-        </div>
-        <div class="col col-20">
-         <span class="icon-camera mood-border mood-icon"></span> 
-        </div>
-        <div class="col col-20">
-         <span class="icon-camera mood-border mood-icon"></span> 
-        </div>
-        <div class="col col-20">
-         <span class="icon-camera mood-border mood-icon"></span> 
+        <div class="col col-20" ng-repeat="moodItem in secondRowMood" >
+          <span ng-hide="moodItem.user_mood_picture"  class="icon-camera mood-border mood-icon" ng-click="openSetMoodModal(moodItem)"></span> 
+         <img class="img_dash" ng-show="moodItem.user_mood_picture"  ng-click="openSetMoodModal(moodItem)" ng-src="{{moodItem.user_mood_picture}}" alt="" height="45px" width="45px">
+          <i class="icon icon-edit icon-edit-hover-small"></i> 
         </div>
         <div class="col col-10"></div>
     </div>
     <div class="row" style="text-align: center;position: relative;">
         <div class="col col-10"></div>
         <div ng-repeat="moodItem in secondRowMood" class="col col-20 mood-icon">{{moodItem.mood}}</div>
-        <!-- <div class="col col-20 mood-icon">Content</div>
-        <div class="col col-20 mood-icon">Tired</div>
-        <div class="col col-20 mood-icon">Annoyed</div>
-        <div class="col col-20 mood-icon">Empty</div> -->
         <div class="col col-10"></div>
-    </div>
-    </div>
+    </div> 
+    </div> 
   </ion-content>
+
+
 </ion-view>
+
+<script id="my-modal.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-positive">
+      <h1 class="title">add mood</h1>
+      <button class="button button-clear button-primary button-large ion-chevron-down" ng-click="modal.hide()"></button>
+    </ion-header-bar>
+    <ion-content class="modal-bg" scroll="false">
+        
+        <div class="mood-modal-wrapper" ng-hide="moodItem.user_mood_picture">
+            <div class="mood-modal-content">
+                <p>tap to <br> add a picture of</p>
+                <p><i class="icon ion-plus-round"></i><span class="icon-camera icon-camera-size"></span></p>
+                <h2>{{moodItem.title}}</h2>
+            </div>
+        </div>
+
+        <div ng-show="moodItem.user_mood_picture">
+                <img ng-src="{{moodItem.user_mood_picture}}">
+                <a class="btn-modal-float" ng-click="save()"><i class="icon icon-camera"></i><br>edit</a>
+        </div>
+    </ion-content>
+  </ion-modal-view>
+</script>

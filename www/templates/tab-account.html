@@ -66,16 +66,19 @@
     <ion-content class="modal-bg" scroll="false">
         
         <div class="mood-modal-wrapper" ng-hide="moodItem.user_mood_picture">
-            <div class="mood-modal-content">
+            <div class="mood-modal-content" ng-click="uploadFile()">
                 <p>tap to <br> add a picture of</p>
                 <p><i class="icon ion-plus-round"></i><span class="icon-camera icon-camera-size"></span></p>
-                <h2>{{moodItem.mood}}</h2>
+                <h2>{{moodItem.title}}</h2>
             </div>
         </div>
 
         <div ng-show="moodItem.user_mood_picture">
-                <img ng-src="{{moodItem.user_mood_picture}}">
-                <a class="btn-modal-float" ng-click="save()"><i class="icon icon-camera"></i><br>edit</a>
+                <div class="item item-image">
+                  <img ng-src="{{moodItem.user_mood_picture}}">
+                </div>
+                <a class="btn-modal-float" ng-hide="save" ng-click="uploadFile()"><i class="icon icon-camera"></i><br>edit</a>
+                <a class="btn-modal-float" ng-show="save" ng-click="modal.hide()"><i class="icon icon-camera"></i><br>save</a>
         </div>
     </ion-content>
   </ion-modal-view>

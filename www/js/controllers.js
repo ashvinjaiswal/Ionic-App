@@ -11,7 +11,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('ChallengesCtrl', function($scope,$state, Chats,UserFactory) {
+.controller('ChallengesCtrl', function($scope,$state,UserFactory) {
 
   //get the data from the factory
   UserFactory.userChallengesData().success(function(data) {
@@ -51,7 +51,7 @@ angular.module('starter.controllers', [])
   
 })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
+.controller('ChatDetailCtrl', function($scope, $stateParams) {
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
@@ -114,15 +114,17 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('AccountCtrl', function($scope,$state,$ionicModal,UserFactory,Loader) {
+.controller('AccountCtrl', function($scope,$state,$ionicModal,$ionicPlatform, $cordovaCamera, $cordovaFileTransfer,UserFactory,Loader,UploadFact,LSFactory) {
 
+      //set scope save factory to false
+      $scope.save= false;
       
       //get the user moods from the server
       UserFactory.user_dashboard().success(function(data) {
           //get the dashboard data
           
           var resposeData = data.data[0];
-          //console.log(resposeData);
+          console.log(resposeData);
           $scope.moods = resposeData.userAllMoods;
           $scope.firstRowMood= $scope.moods.slice(0,4);
           $scope.secondRowMood= $scope.moods.slice(4,9);
@@ -155,6 +157,7 @@ angular.module('starter.controllers', [])
       });
       $scope.openSetMoodModal = function(moodItem) {
         console.log(moodItem);
+        $scope.save =false;
         $scope.modal.show();
         $scope.moodItem=moodItem;
       };
@@ -173,5 +176,18 @@ angular.module('starter.controllers', [])
       $scope.$on('modal.removed', function() {
         // Execute action
       });
+
+      $scope.uploadFile = function() {
+
+        UploadFact.fileTo('http://meanmentors.com/testapi/index.php/moodeeapi/dashboard_mood_upload/',$scope.moodItem.moodid).then(
+        function(res) {
+          // Success
+          $scope.moodItem.user_mood_picture = LSFactory.get('ImageURL');
+          $scope.save =true;
+
+        }, function(err) {
+          // Error
+        });
+      };
 
 });

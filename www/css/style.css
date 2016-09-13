@@ -189,6 +189,7 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active, ion-tabs.tabs-col
     top: -16px;
 }
 .btn-modal-float{
+  z-index: 5;
    position: absolute;
     bottom: 3em;
     width: 80px;

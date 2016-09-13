@@ -1,40 +1,77 @@
 <ion-view view-title="Challenge">
   <ion-content class="chd padding">
- <div class="card">
-  <div class="item item-divider card_head">
-   <h1 class="h1_card_title">{{challengeData.title}}</h1>
-  </div>
-  <div class="item item-text-wrap">
- 	<div class="list">
- 		<a class="item" href="#">
-		    <h2 class="h2_chd_card_title">directions</h2>
-  		</a>
-  		<a class="item" href="#">
-    		<span class="num_cir">1</span>
-    		Cook a Meal
-    		<p class="p_inner_card_subtitle">{{challengeData.directions}}</p>
-    		
-  		</a>
-  		<a class="item item-icon-right" href="#" ng-show={{challengeData.picturereq=='Y'}}>
-    		<span class="num_cir">2</span>
-    		Take a Picture
-    		<p class="p_inner_card_subtitle">of your challenge</p>
-        <i class="icon icon-camera button button-small cam_ico"></i>
-  		</a>
-      
- 	</div>
-  <br>
-  <br>
-  </div>
-  <div class="item item-divider card_foot">
-      <div class="float_cir">
-      save
+  <div class="card" ng-hide="leaveComment">
+    <div class="item item-divider card_head">
+      <h1 class="h1_card_title">{{challengeData.title}}</h1>
     </div>
-    <i class="icon ion-edit"></i>	
-    	&nbsp;&nbsp; leave a comment
+    <div class="item item-text-wrap">
+      <div class="list">
+        <li class="item" >
+          <h2 class="h2_chd_card_title">directions</h2>
+        </li>
+        <li class="item" >
+          <span class="num_cir">1</span>
+          Cook a Meal
+          <p class="p_inner_card_subtitle">{{challengeData.directions}}</p>
+          
+        </li>
+        <li class="item item-icon-right" ng-show={{challengeData.picturereq=='Y'}}>
+          <span class="num_cir">2</span>
+          Take a Picture
+          <p class="p_inner_card_subtitle">of your challenge</p>
+          <div ng-click="userCheallengePic()">
+            <i ng-hide="user.pic" class="icon icon-camera button button-small cam_ico" ></i>
+            <img ng-show="user.pic" class="img-model-thumb" ng-src="{{user.pic}}" alt="" width="45px" height="45px">
+          </li>
+          
+        </a>
+      	<!-- <a class="item" href="#">
+          <h2 class="h2_chd_card_title">directions</h2>
+      	</a>
+      	<a class="item" href="#">
+      		<span class="num_cir">1</span>
+      		Cook a Meal
+      		<p class="p_inner_card_subtitle">{{challengeData.directions}}</p>
+      		
+      	</a>
+      	<a class="item item-icon-right" href="#" ng-show={{challengeData.picturereq=='Y'}}>
+      		<span class="num_cir">2</span>
+      		Take a Picture
+      		<p class="p_inner_card_subtitle">of your challenge</p>
+          <div ng-click="userCheallengePic()">
+            <i class="icon icon-camera button button-small cam_ico" ></i>
+          </div>
+          
+      	</a> -->
+      </div>
+      <br>
+      <br>
+    </div>
+    <div class="item item-divider card_foot">
+      <div class="float_cir" ng-click="saveChallenge(user)">
+        save
+      </div>
+      <div ng-click="comment()">
+        <i class="icon ion-edit"></i> 
+        &nbsp;&nbsp; leave a comment
+      </div>
+    </div>
   </div>
-  
-</div>
+
+  <div class="card" ng-show="leaveComment">
+    <div class="item item-divider card_head">
+      <a ng-click="detailClick(user)" class="button button-head-large ion-chevron-left button-clear button-light"><i class="icon on-chevron-left" ></i> back</a>
+      <span class="time">{{challengeData.formatted_time}}</span>
+    </div>
+    <div class="item item-text-wrap">
+      <textarea class="textareas" rows="3" ng-model="user.user_comment" cols="50" placeholder="Leave your comment"  autofocus ></textarea>
+      <br>
+      <br>
+    </div>
+    <div class="item card_footer" ng-click="detailClick(user)">
+       <a class="button button-full">Save</a>
+    </div>
+  </div>
 
   </ion-content>
 </ion-view>

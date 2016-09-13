@@ -174,8 +174,12 @@ angular.module('starter.factory', [])
                 return $http.get(base+'/user_challenges_data');
             },
             setUserChallengeFlag:function(flagData){
-                return $http.get(base+'/update_challenge_flag',flagData);
+                return $http.post(base+'/update_challenge_flag',flagData);
             },
+            setUserChallenge:function(userData){
+                return $http.post(base+'/update_user_challenge',userData);
+            }
+            ,
             logout: function() {
                 AuthFactory.deleteAuth();
             }

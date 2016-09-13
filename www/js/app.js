@@ -67,6 +67,7 @@ $ionicConfigProvider.tabs.style("standard"); //Makes them all look the same acro
 
   .state('tab.challenges', {
       url: '/challenges',
+      cache: false,
       views: {
         'tab-challenges': {
           templateUrl: 'templates/tab-challenges.html',

@@ -209,7 +209,12 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active, ion-tabs.tabs-col
 }
 /*Mood Model style end*/
 
-
+.img-challenge-thumb{
+    border-radius: 5px;
+    position: absolute;
+    top: 9px;
+    right: 21px;
+}
 
 /*------tabs-challenges--------------*/
 
@@ -262,6 +267,9 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active, ion-tabs.tabs-col
 .challenges .active-card-dark.space{
   margin-top: 1em;
 }
+.pending-card-light.space{
+  margin-top: 1em;
+}
 .challenges .new-challenge-icon{
 	font-size: 45px;
 	color: #7b9caf;
@@ -270,8 +278,8 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active, ion-tabs.tabs-col
 .new-challenge-icon i.icon.ion-ios-star {
     position: absolute;
     top: 0;
-    left: 20%;
-    transform: translateX(-20%);
+    left: 30%;
+    transform: translateX(-30%);
     font-size: 0.3em;
     color: white;
     background: #ff6600;
@@ -427,6 +435,18 @@ ul.wakeup-list li{
 	color: #fff;
 	font-size: 22px;
 }
+.card_head .button.button-h-large{
+  font-size: 1.2em;
+}
+.card_head a.button.button-head-large{
+    font-size: 1.6em;
+}
+.card_head span.time {
+    line-height: 3.6;
+    float: right;
+    font-size: 0.8em;
+    color: #fff;
+}
 .chd .item{
 	border-color: #fff;
 }
@@ -460,6 +480,12 @@ ul.wakeup-list li{
     color: #fff;
     text-align: center;
     box-shadow: 0 2px 4px rgba(0,0,0, 0.12), 0 2px 4px rgba(0,0,0, 0.24);
+}
+.card_footer{
+  padding: 0px;
+}
+.card_footer .button.button-full{
+  margin-bottom: 0px;
 }
 .chd .cam_ico{
 	border: 1px solid #999;

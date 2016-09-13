@@ -11,14 +11,15 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('ChallengesCtrl', function($scope,$state,UserFactory) {
+.controller('ChallengesCtrl', function($scope,$state,UserFactory,Loader) {
 
   //get the data from the factory
+  Loader.showLoading('Loading...');
   UserFactory.userChallengesData().success(function(data) {
           //get the dashboard data
           console.log(data);
           $scope.challengeData = data;
-
+          Loader.hideLoading();
 
       }).error(function(err, statusCode) {
           Loader.hideLoading();
@@ -28,11 +29,21 @@ angular.module('starter.controllers', [])
 
 
   $scope.challengeDetail = function(challengeItem) {
-        //console.log(challengeItem);
+        console.log(challengeItem);
         //$state.go('tab.chd');
 
         //set the view flag to 1 
-        //var flagData = {"":"","":""};
+        Loader.showLoading('Loading...');
+        var flagData = {"challenge_id":challengeItem.Id,"flag":0};
+        UserFactory.setUserChallengeFlag(flagData).success(function(data) {
+          //get the dashboard data
+          //console.log(data);
+          Loader.hideLoading();
+          
+      }).error(function(err, statusCode) {
+          Loader.hideLoading();
+          Loader.toggleLoadingWithMessage(err.message);
+      });
 
 
         $state.go('tab.chd',{obj: challengeItem});
@@ -43,11 +54,133 @@ angular.module('starter.controllers', [])
   
 })
 
-.controller('ChallengeDetailCtrl', function($scope,$state,$stateParams) {
+.controller('ChallengeDetailCtrl', function($scope,$state,$stateParams,Loader,UserFactory,ChallengeUploadFact,LSFactory) {
   $scope.challengeData = $state.params.obj;
+  var itemdata = $state.params.obj;
+  
+  $scope.leaveComment=false;
+  //set the comment dta
+  $scope.user= {
+        challenge_id:itemdata.Id,
+        pic:'',
+        user_comment: ''
+    };
+
+
   //console.log($state.params.obj);
 
-  
+  //when leave comment is clicked
+  $scope.comment = function(){
+    console.log("comment");
+    $scope.leaveComment=true;
+  }
+  //when save button is click on leave comment
+  $scope.detailClick = function(user){
+    console.log("detail");
+    console.log(user);
+    $scope.leaveComment=false;
+
+  }
+
+  //Capture the challenge image
+  $scope.userCheallengePic = function(user) {
+      //console.log("test");
+      ChallengeUploadFact.cemeraCapture().then(function(res) {
+          // Success
+          var cemeraFileObject = res;
+          $scope.user.pic= res;
+          console.log(cemeraFileObject);
+          console.log($scope.user);
+
+        }, function(err) {
+          // Error
+        });
+    
+  }
+  // End of Capture the challenge image
+
+  //save challenge data
+  $scope.saveChallenge = function(user) {
+    //console.log(user);
+    console.log($scope.user);
+    //show loading indicator
+   
+
+    //check for the image is there
+    if($scope.user.pic){
+
+      Loader.showLoading('Saving...');
+      //console.log("image is there");
+      ChallengeUploadFact.fileTransfer('http://meanmentors.com/testapi/index.php/moodeeapi/update_user_challenge',$scope.user.pic,$scope.user).then(function(data) {
+        
+          //hide the loading
+          //console.log(data);
+          Loader.hideLoading();
+          //reset scope
+          $scope.user= {
+              challenge_id:'',
+              pic:'',
+              user_comment: ''
+          };
+          $state.go('tab.challenges');
+          
+      }).error(function(err, statusCode) {
+          Loader.hideLoading();
+          Loader.toggleLoadingWithMessage(err.message);
+      });
+
+    }else{
+      
+      Loader.showLoading('Saving...');  
+      //console.log("image is not there");
+      UserFactory.setUserChallenge($scope.user).success(function(data) {
+          
+          //hide the loading
+          Loader.hideLoading();
+          console.log(data);
+
+          //reset scope
+          $scope.user= {
+              challenge_id:'',
+              pic:'',
+              user_comment: ''
+          };
+          
+          //$state.go('tab.dash');
+          $state.go('tab.challenges');
+          
+      }).error(function(err, statusCode) {
+          Loader.hideLoading();
+          Loader.toggleLoadingWithMessage(err.message);
+      });
+
+    }
+
+ 
+
+    
+    
+    
+
+  };
+
+  //upload code 
+  $scope.uploadFile = function() {
+
+        UploadFact.fileTo('http://meanmentors.com/testapi/index.php/moodeeapi/dashboard_mood_upload/',$scope.moodItem.moodid).then(
+        function(res) {
+          // Success
+          $scope.moodItem.user_mood_picture = LSFactory.get('ImageURL');
+          $scope.save =true;
+
+        }, function(err) {
+          // Error
+        });
+      };
+
+
+
+
   
 })
 
@@ -56,7 +189,7 @@ angular.module('starter.controllers', [])
 })
 
 .controller('SignInCtrl', function($scope, $state,AuthFactory,UserFactory,Loader) {
-    $scope.user = {
+    $scope.user= {
         email: '',
         password: ''
     };

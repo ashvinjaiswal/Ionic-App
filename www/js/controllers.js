@@ -124,10 +124,11 @@ angular.module('starter.controllers', [])
           };
           $state.go('tab.challenges');
           
-      }).error(function(err, statusCode) {
+      }, function(err) {
+          // Error
           Loader.hideLoading();
           Loader.toggleLoadingWithMessage(err.message);
-      });
+        });
 
     }else{
       

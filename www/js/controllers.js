@@ -310,18 +310,4 @@ angular.module('starter.controllers', [])
       $scope.$on('modal.removed', function() {
         // Execute action
       });
-
-      $scope.uploadFile = function() {
-
-        UploadFact.fileTo('http://meanmentors.com/testapi/index.php/moodeeapi/dashboard_mood_upload/',$scope.moodItem.moodid).then(
-        function(res) {
-          // Success
-          $scope.moodItem.user_mood_picture = LSFactory.get('ImageURL');
-          $scope.save =true;
-
-        }, function(err) {
-          // Error
-        });
-      };
-
 });

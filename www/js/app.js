@@ -7,7 +7,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','starter.factory','ngCordova'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform,$rootScope) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -21,6 +21,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','s
       StatusBar.styleDefault();
     }
   });
+
+  // set value for timepicker
+
+  $rootScope.timeValue1 = new Date();
+  $rootScope.timeValue2 = new Date();
 })
 
 .config(function($ionicConfigProvider) {

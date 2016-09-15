@@ -160,7 +160,9 @@ angular.module('starter.factory', [])
             user_dashboard: function() {
                 return $http.get(base+'/user_dashboard_data');
             },
-
+             user_data: function() {
+                return $http.get(base+'/user_data');
+            },
             register: function(user) {
                 return $http.post(base + '/register', user);
             },

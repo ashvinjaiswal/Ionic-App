@@ -3,9 +3,33 @@ angular.module('starter.controllers', [])
 .controller('DashCtrl', function($scope,$state,UserFactory) {
 
    $scope.setUserMood = function() {
-    console.log("mood is clicked");
+    //console.log("mood is clicked");
     $state.go('tab.setmood');
   };
+
+  $scope.save = function(user) {
+    $scope.set = $scope.set + 1;
+
+  };
+
+  UserFactory.user_data().success(function(data){
+
+    //console.log(data.data[0].userTodayMood);
+    $scope.moods = data.data[0].userTodayMood;
+    console.log("length of the today mood"+data.data[0].userTodayMood.length);
+
+    $scope.moodSetDate=data.data[0].userTodayMood.mood_date;
+    $scope.moods = data.data[0].moods;
+    var date = new Date();
+    $scope.TodayDate = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
+    console.log($scope.TodayDate);
+    console.log($scope.moodSetDate);
+    $scope.set = 1;
+
+
+  }).error(function(err, statusCode) {
+      controller.log(err.message);
+  });
 
 
 
@@ -17,7 +41,7 @@ angular.module('starter.controllers', [])
   Loader.showLoading('Loading...');
   UserFactory.userChallengesData().success(function(data) {
           //get the dashboard data
-          console.log(data);
+          //console.log(data);
           $scope.challengeData = data;
           
           Loader.hideLoading();
@@ -61,7 +85,7 @@ angular.module('starter.controllers', [])
   $scope.challengeDetailComplete = function(challengeItem) {
         //challengeItem['pending']=true;
         //$state.go('tab.ccd');
-        console.log(challengeItem);
+        //console.log(challengeItem);
         challengeItem['type']='pending';
         //console.log(challengeItem);
         $state.go('tab.chd',{obj: challengeItem});
@@ -94,7 +118,7 @@ angular.module('starter.controllers', [])
   //when save button is click on leave comment
   $scope.detailClick = function(user){
     //console.log("detail");
-    console.log(user);
+    //console.log(user);
     $scope.leaveComment=false;
 
   }
@@ -106,8 +130,8 @@ angular.module('starter.controllers', [])
           // Success
           var cemeraFileObject = res;
           $scope.user.pic= res;
-          console.log(cemeraFileObject);
-          console.log($scope.user);
+          //console.log(cemeraFileObject);
+          //console.log($scope.user);
 
         }, function(err) {
           // Error
@@ -119,7 +143,7 @@ angular.module('starter.controllers', [])
   //save challenge data
   $scope.saveChallenge = function(user) {
     //console.log(user);
-    console.log($scope.user);
+    //console.log($scope.user);
     //show loading indicator
    
 
@@ -155,7 +179,7 @@ angular.module('starter.controllers', [])
           
           //hide the loading
           Loader.hideLoading();
-          console.log(data);
+          //console.log(data);
 
           //reset scope
           $scope.user= {
@@ -251,7 +275,7 @@ angular.module('starter.controllers', [])
           //get the dashboard data
           
           var resposeData = data.data[0];
-          console.log(resposeData);
+          //console.log(resposeData);
           $scope.moods = resposeData.userAllMoods;
           $scope.firstRowMood= $scope.moods.slice(0,4);
           $scope.secondRowMood= $scope.moods.slice(4,9);
@@ -283,7 +307,7 @@ angular.module('starter.controllers', [])
         $scope.modal = modal;
       });
       $scope.openSetMoodModal = function(moodItem) {
-        console.log(moodItem);
+        //console.log(moodItem);
         $scope.save =false;
         $scope.modal.show();
         $scope.moodItem=moodItem;

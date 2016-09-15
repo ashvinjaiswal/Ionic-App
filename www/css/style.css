@@ -550,3 +550,19 @@ ul.wakeup-list li{
 	margin-left: -15px;
     margin-top: 15px;
 }
+
+.img_dash{
+  margin-top: -25%;
+  border-radius: 5px;
+}
+.icon-edit-hover-small{
+  position: absolute;
+  color: #fff;
+  margin-left: -15px;
+    margin-top: 15px;
+}
+.star-wrapper ul{
+  display: -webkit-inline-box;
+  margin-top: 5%;
+  font-size: 20px;
+}

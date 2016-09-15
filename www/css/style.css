@@ -426,6 +426,17 @@ ul.wakeup-list li{
 .chd .card_head{
 	background-color: #34596f;
 }
+.chd .card_head.coach{
+  background: #ff6600;
+}
+.item.coach-content{
+  background: #fcf0e7;
+}
+.item.coach-content textarea[disabled]{
+    background-color: #fcf0e7;
+    color: #ff6600;
+    cursor: not-allowed;
+}
 .chd .h2_chd_card_title
 {
 	color: orange;
@@ -434,6 +445,7 @@ ul.wakeup-list li{
 .chd .h1_card_title{
 	color: #fff;
 	font-size: 22px;
+  padding: 10px;
 }
 .card_head .button.button-h-large{
   font-size: 1.2em;
@@ -500,6 +512,21 @@ ul.wakeup-list li{
 }
 .ccd .coach_button{
 	z-index: 2;
+    bottom: 15px;
+    width: 70%;
+    right: 16px;
+    height: 50px;
+    margin:0 auto;
+    border-radius: 20px;
+    background: #ff6600;
+    padding-top: 15px;
+    text-decoration: none;
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0, 0.12), 0 2px 4px rgba(0,0,0, 0.24);
+}
+.coach_button{
+  z-index: 2;
     bottom: 15px;
     width: 70%;
     right: 16px;

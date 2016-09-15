@@ -19,6 +19,7 @@ angular.module('starter.controllers', [])
           //get the dashboard data
           console.log(data);
           $scope.challengeData = data;
+          
           Loader.hideLoading();
 
       }).error(function(err, statusCode) {
@@ -29,8 +30,9 @@ angular.module('starter.controllers', [])
 
 
   $scope.challengeDetail = function(challengeItem) {
-        console.log(challengeItem);
-        //$state.go('tab.chd');
+        challengeItem['type']='active';
+        //console.log(challengeItem);
+       
 
         //set the view flag to 1 
         Loader.showLoading('Loading...');
@@ -48,8 +50,21 @@ angular.module('starter.controllers', [])
 
         $state.go('tab.chd',{obj: challengeItem});
   }
-  $scope.challengeDetailComplete = function() {
-        $state.go('tab.ccd');
+
+  // Get the pending detail
+  $scope.challengePendingDetail = function(challengeItem) {
+        //add the challange type
+        challengeItem['type']='pending';
+        //console.log(challengeItem);
+        $state.go('tab.chd',{obj: challengeItem});
+  }
+  $scope.challengeDetailComplete = function(challengeItem) {
+        //challengeItem['pending']=true;
+        //$state.go('tab.ccd');
+        console.log(challengeItem);
+        challengeItem['type']='pending';
+        //console.log(challengeItem);
+        $state.go('tab.chd',{obj: challengeItem});
   }
   
 })
@@ -57,26 +72,28 @@ angular.module('starter.controllers', [])
 .controller('ChallengeDetailCtrl', function($scope,$state,$stateParams,Loader,UserFactory,ChallengeUploadFact,LSFactory) {
   $scope.challengeData = $state.params.obj;
   var itemdata = $state.params.obj;
-  
+
   $scope.leaveComment=false;
   //set the comment dta
   $scope.user= {
         challenge_id:itemdata.Id,
-        pic:'',
-        user_comment: ''
+        pic:itemdata.challenge_picture,
+        user_comment: itemdata.user_comment
     };
 
 
   //console.log($state.params.obj);
 
   //when leave comment is clicked
-  $scope.comment = function(){
-    console.log("comment");
+  $scope.comment = function(commentType){
+    //console.log("comment");
+    $scope.commentType=commentType;
+    //console.log(commentType);
     $scope.leaveComment=true;
   }
   //when save button is click on leave comment
   $scope.detailClick = function(user){
-    console.log("detail");
+    //console.log("detail");
     console.log(user);
     $scope.leaveComment=false;
 
@@ -156,33 +173,7 @@ angular.module('starter.controllers', [])
       });
 
     }
-
- 
-
-    
-    
-    
-
   };
-
-  //upload code 
-  $scope.uploadFile = function() {
-
-        UploadFact.fileTo('http://meanmentors.com/testapi/index.php/moodeeapi/dashboard_mood_upload/',$scope.moodItem.moodid).then(
-        function(res) {
-          // Success
-          $scope.moodItem.user_mood_picture = LSFactory.get('ImageURL');
-          $scope.save =true;
-
-        }, function(err) {
-          // Error
-        });
-      };
-
-
-
-
-  
 })
 
 .controller('ChatDetailCtrl', function($scope, $stateParams) {
@@ -213,9 +204,9 @@ angular.module('starter.controllers', [])
           Loader.hideLoading();
           $state.go('tab.dash');
           
-      }).error(function(err, statusCode) {
+      }).error(function(err) {
           Loader.hideLoading();
-          Loader.toggleLoadingWithMessage(err.message);
+          Loader.toggleLoadingWithMessage(err);
       });
     };
   
@@ -240,6 +231,8 @@ angular.module('starter.controllers', [])
   };
   
 })
+
+// Navigation Controller
 .controller('NavCtrl', function($scope, $state) {
   $scope.dashboard = function() {
     $state.go('tab.account',{}, {reload: true});
@@ -247,7 +240,7 @@ angular.module('starter.controllers', [])
   
 })
 
-
+// Account controller
 .controller('AccountCtrl', function($scope,$state,$ionicModal,$ionicPlatform, $cordovaCamera, $cordovaFileTransfer,UserFactory,Loader,UploadFact,LSFactory) {
 
       //set scope save factory to false
@@ -310,4 +303,17 @@ angular.module('starter.controllers', [])
       $scope.$on('modal.removed', function() {
         // Execute action
       });
+      $scope.uploadFile = function() {
+
+        UploadFact.fileTo('http://meanmentors.com/testapi/index.php/moodeeapi/dashboard_mood_upload/',$scope.moodItem.moodid).then(
+        function(res) {
+          // Success
+          $scope.moodItem.user_mood_picture = LSFactory.get('ImageURL');
+          $scope.save =true;
+
+        }, function(err) {
+          // Error
+        });
+      };
+
 });

@@ -2,7 +2,7 @@
   <ion-content class="challenges">
     <ion-slide-box show-pager="false" ion-slide-tabs>
       <ion-slide ion-slide-tab-label="Active">
-         
+         <!-- {{challengeData.active.length}} -->
           <!-- <div class="card active-card-light">
             <div class="row">
               <div class="col col-20 col-center icon-restart your-challenge-icon"></div>
@@ -51,7 +51,7 @@
       </ion-slide>
       <ion-slide ion-slide-tab-label="Pending">
           
-          <div class="card pending-card-light space" ng-repeat="challengeItem in challengeData.pending">
+          <div class="card pending-card-light space" ng-repeat="challengeItem in challengeData.pending" ng-click="challengePendingDetail(challengeItem)">
             <div class="row">
               <div class="col col-20 col-center icon-pending new-challenge-icon"></div>
               <div class="col">
@@ -78,7 +78,7 @@
       </ion-slide>
       <ion-slide ion-slide-tab-label="Complete">
           <div class="list list-inset challenge-complete-list">
-            <a class="item item-icon-left item-icon-right" ng-repeat="challengeItem in challengeData.completed" ng-click="challengeDetailComplete()">
+            <a class="item item-icon-left item-icon-right" ng-repeat="challengeItem in challengeData.completed" ng-click="challengeDetailComplete(challengeItem)">
               <i class="icon ion-checkmark-round"></i>
                 <h3>completed project</h3>
                 <span>Posted {{challengeItem.formatted_time}}</span>

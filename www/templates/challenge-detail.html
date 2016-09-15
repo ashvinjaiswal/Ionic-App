@@ -16,15 +16,21 @@
           
         </li>
         <li class="item item-icon-right" ng-show={{challengeData.picturereq=='Y'}}>
-          <span class="num_cir">2</span>
-          Take a Picture
-          <p class="p_inner_card_subtitle">of your challenge</p>
-          <div ng-click="userCheallengePic()">
-            <i ng-hide="user.pic" class="icon icon-camera button button-small cam_ico" ></i>
-            <img ng-show="user.pic" class="img-challenge-thumb" ng-src="{{user.pic}}" alt="" width="45px" height="45px">
-          </li>
+            <span class="num_cir">2</span>
+            Take a Picture
+            <p class="p_inner_card_subtitle">of your challenge</p>
+            <div ng-click="userCheallengePic()" ng-show="challengeData.type=='active'">
+              <i ng-hide="user.pic" class="icon icon-camera button button-small cam_ico" ></i>
+              <img ng-show="user.pic" class="img-challenge-thumb" ng-src="{{user.pic}}" alt="" width="45px" height="45px">
+            </div> 
+            <!-- show only pendind and completed -->
+            <div ng-show="challengeData.type=='pending'">
+              <i ng-hide="user.pic" class="icon icon-camera button button-small cam_ico" ></i>
+              <img ng-show="user.pic" class="img-challenge-thumb" ng-src="{{user.pic}}" alt="" width="45px" height="45px">
+            </div>   
+        </li>
           
-        </a>
+        
       	<!-- <a class="item" href="#">
           <h2 class="h2_chd_card_title">directions</h2>
       	</a>
@@ -44,21 +50,32 @@
           
       	</a> -->
       </div>
+      <div class="coach_button" ng-show="challengeData.completed_feedback" ng-click="comment('coach')">
+        <strong>coach</strong> comments
+      </div>
       <br>
       <br>
     </div>
     <div class="item item-divider card_foot">
-      <div class="float_cir" ng-click="saveChallenge(user)">
+      <div ng-show="challengeData.type=='active'" class="float_cir" ng-click="saveChallenge(user)">
         save
       </div>
-      <div ng-click="comment()">
-        <i class="icon ion-edit"></i> 
-        &nbsp;&nbsp; leave a comment
+      <div ng-click="comment('user')">
+        <div ng-show="challengeData.type=='active'">
+          <i class="icon ion-edit"></i> 
+          &nbsp;&nbsp; 
+          <span>leave a comment</span> 
+        </div>
+      </div>
+      <div ng-show="challengeData.type=='pending'">
+          <i class="icon ion-checkmark-round"></i> 
+          &nbsp;&nbsp; 
+          <span>comments</span>
       </div>
     </div>
   </div>
-
-  <div class="card" ng-show="leaveComment">
+  <!-- Show only when user comment -->
+  <div class="card" ng-show="leaveComment && commentType=='user'">
     <div class="item item-divider card_head">
       <a ng-click="detailClick(user)" class="button button-head-large ion-chevron-left button-clear button-light"><i class="icon on-chevron-left" ></i> back</a>
       <span class="time">{{challengeData.formatted_time}}</span>
@@ -70,6 +87,18 @@
     </div>
     <div class="item card_footer" ng-click="detailClick(user)">
        <a class="button button-full">Save</a>
+    </div>
+  </div>
+  <!-- Show only when coach comment -->
+  <div class="card" ng-show="leaveComment && commentType=='coach'">
+    <div class="item item-divider card_head coach">
+      <a ng-click="detailClick(user)" class="button button-head-large ion-chevron-left button-clear button-light"><i class="icon on-chevron-left" ></i> back</a>
+      <span class="time">{{challengeData.formatted_time}}</span>
+    </div>
+    <div class="item coach-content item-text-wrap">
+      <textarea class="textareas" rows="5" ng-model="challengeData.completed_feedback" cols="50" placeholder="Leave your comment"  autofocus disabled></textarea>
+      <br>
+      <br>
     </div>
   </div>
 

@@ -62,11 +62,20 @@
       </div>
       <div ng-click="comment('user')">
         <div ng-show="challengeData.type=='active'">
-          <i class="icon ion-edit"></i> 
-          &nbsp;&nbsp; 
-          <span>leave a comment</span> 
+          <div ng-hide="user.user_comment">
+            <i class="icon ion-edit"></i> 
+            &nbsp;&nbsp; 
+            <span>leave a comment</span> 
+          </div>
+          <div ng-show="user.user_comment">
+            <i class="icon ion-checkmark-round"></i> 
+            &nbsp;&nbsp; 
+            <span>comment saved</span>
+          </div>
+          
         </div>
       </div>
+
       <div ng-show="challengeData.type=='pending'">
           <i class="icon ion-checkmark-round"></i> 
           &nbsp;&nbsp; 

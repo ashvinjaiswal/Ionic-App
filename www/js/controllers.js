@@ -13,10 +13,12 @@ angular.module('starter.controllers', [])
   };
 
   UserFactory.user_data().success(function(data){
-
-    //console.log(data.data[0].userTodayMood);
+    //Get the data from the api
+    $scope.userData = data.data[0];
+    console.log($scope.userData);
+    
     $scope.moods = data.data[0].userTodayMood;
-    console.log("length of the today mood"+data.data[0].userTodayMood.length);
+    //console.log("length of the today mood"+data.data[0].userTodayMood.length);
 
     $scope.moodSetDate=data.data[0].userTodayMood.mood_date;
     $scope.moods = data.data[0].moods;
@@ -41,7 +43,7 @@ angular.module('starter.controllers', [])
   Loader.showLoading('Loading...');
   UserFactory.userChallengesData().success(function(data) {
           //get the dashboard data
-          //console.log(data);
+          console.log(data);
           $scope.challengeData = data;
           
           Loader.hideLoading();
@@ -93,10 +95,10 @@ angular.module('starter.controllers', [])
   
 })
 
-.controller('ChallengeDetailCtrl', function($scope,$state,$stateParams,Loader,UserFactory,ChallengeUploadFact,LSFactory) {
+.controller('ChallengeDetailCtrl', function($scope,$state,$stateParams,$ionicPopup,Loader,UserFactory,ChallengeUploadFact,LSFactory) {
   $scope.challengeData = $state.params.obj;
   var itemdata = $state.params.obj;
-
+  console.log(itemdata);
   $scope.leaveComment=false;
   //set the comment dta
   $scope.user= {
@@ -111,8 +113,8 @@ angular.module('starter.controllers', [])
   //when leave comment is clicked
   $scope.comment = function(commentType){
     //console.log("comment");
-    $scope.commentType=commentType;
     //console.log(commentType);
+    $scope.commentType=commentType;
     $scope.leaveComment=true;
   }
   //when save button is click on leave comment
@@ -145,58 +147,123 @@ angular.module('starter.controllers', [])
     //console.log(user);
     //console.log($scope.user);
     //show loading indicator
-   
+    
+    //check for the image requried for the step
+    if($scope.challengeData.picturereq == "Y"){
+      //check for the image
+      if($scope.user.pic && $scope.user.user_comment){
+           Loader.showLoading('Saving...');
+            //console.log("image is there");
+            ChallengeUploadFact.fileTransfer('http://meanmentors.com/testapi/index.php/moodeeapi/update_user_challenge',$scope.user.pic,$scope.user).then(function(data) {
+              
+                //hide the loading
+                //console.log(data);
+                Loader.hideLoading();
+                //reset scope
+                $scope.user= {
+                    challenge_id:'',
+                    pic:'',
+                    user_comment: ''
+                };
+                $state.go('tab.challenges');
+                
+            }, function(err) {
+                // Error
+                Loader.hideLoading();
+                Loader.toggleLoadingWithMessage(err.message);
+              });
+      }else{
+        $ionicPopup.alert({
+         title: 'Alert',
+         template: 'Please Upload Challenge Image & Submit Comment'
+        });
+      }  
+    }else{
+      //check for the comment 
+      if($scope.user.user_comment){
+          Loader.showLoading('Saving...');  
+          //console.log("image is not there");
+          UserFactory.setUserChallenge($scope.user).success(function(data) {
+              
+              //hide the loading
+              Loader.hideLoading();
+              //console.log(data);
 
-    //check for the image is there
-    if($scope.user.pic){
+              //reset scope
+              $scope.user= {
+                  challenge_id:'',
+                  pic:'',
+                  user_comment: ''
+              };
+              
+              //$state.go('tab.dash');
+              $state.go('tab.challenges');
+              
+          }).error(function(err, statusCode) {
+              Loader.hideLoading();
+              Loader.toggleLoadingWithMessage(err.message);
+          });
 
-      Loader.showLoading('Saving...');
-      //console.log("image is there");
-      ChallengeUploadFact.fileTransfer('http://meanmentors.com/testapi/index.php/moodeeapi/update_user_challenge',$scope.user.pic,$scope.user).then(function(data) {
-        
-          //hide the loading
-          //console.log(data);
-          Loader.hideLoading();
-          //reset scope
-          $scope.user= {
-              challenge_id:'',
-              pic:'',
-              user_comment: ''
-          };
-          $state.go('tab.challenges');
-          
-      }, function(err) {
-          // Error
-          Loader.hideLoading();
-          Loader.toggleLoadingWithMessage(err.message);
+      }else{
+        $ionicPopup.alert({
+         title: 'Alert',
+         template: 'Please submit your comment'
         });
 
-    }else{
-      
-      Loader.showLoading('Saving...');  
-      //console.log("image is not there");
-      UserFactory.setUserChallenge($scope.user).success(function(data) {
-          
-          //hide the loading
-          Loader.hideLoading();
-          //console.log(data);
-
-          //reset scope
-          $scope.user= {
-              challenge_id:'',
-              pic:'',
-              user_comment: ''
-          };
-          
-          //$state.go('tab.dash');
-          $state.go('tab.challenges');
-          
-      }).error(function(err, statusCode) {
-          Loader.hideLoading();
-          Loader.toggleLoadingWithMessage(err.message);
-      });
-
+      }
     }
+     
+
+    // //check for the image is there
+    // if($scope.user.pic){
+
+    //   Loader.showLoading('Saving...');
+    //   //console.log("image is there");
+    //   ChallengeUploadFact.fileTransfer('http://meanmentors.com/testapi/index.php/moodeeapi/update_user_challenge',$scope.user.pic,$scope.user).then(function(data) {
+        
+    //       //hide the loading
+    //       //console.log(data);
+    //       Loader.hideLoading();
+    //       //reset scope
+    //       $scope.user= {
+    //           challenge_id:'',
+    //           pic:'',
+    //           user_comment: ''
+    //       };
+    //       $state.go('tab.challenges');
+          
+    //   }, function(err) {
+    //       // Error
+    //       Loader.hideLoading();
+    //       Loader.toggleLoadingWithMessage(err.message);
+    //     });
+
+    // }else{
+      
+    //   Loader.showLoading('Saving...');  
+    //   //console.log("image is not there");
+    //   UserFactory.setUserChallenge($scope.user).success(function(data) {
+          
+    //       //hide the loading
+    //       Loader.hideLoading();
+    //       //console.log(data);
+
+    //       //reset scope
+    //       $scope.user= {
+    //           challenge_id:'',
+    //           pic:'',
+    //           user_comment: ''
+    //       };
+          
+    //       //$state.go('tab.dash');
+    //       $state.go('tab.challenges');
+          
+    //   }).error(function(err, statusCode) {
+    //       Loader.hideLoading();
+    //       Loader.toggleLoadingWithMessage(err.message);
+    //   });
+
+    // }
   };
 })
 

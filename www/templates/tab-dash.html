@@ -1,5 +1,5 @@
-<ion-view view-title="My Mood">
-  <ion-content class="dashboard-background"  ng-show="{{TodayDate!=moodSetDate}}">
+<ion-view view-title="My Mood" cache-view="false">
+  <ion-pane class="dashboard-background">
     <ion-slide-box on-slide-changed="slideChanged(index)">
           <ion-slide>
               <div class="slider-content">
@@ -27,81 +27,5 @@
               </div>
           </ion-slide>
     </ion-slide-box>
-  </ion-content>
-
-  <ion-content class="dashboard-background" ng-show="{{set == 2}}">
-            <div class="mood-wrapper">
-            <div class="item item-image">
-                <img src="img/profilepic.png">
-                <div class="time-wrapper">
-                    <p class="title">Happy <!-- <span class="time">Today @ 8.28 am</span> --></p>                    
-                </div>
-            </div>
-            <div class="item item-divider mood-footer">
-                <!-- <blockquote>Happiness is contigious</blockquote>
-                 -->
-                <a class="btn-float" ng-click="save()">SAVE</a>
-                
-                 <h2>How happy are you?</h2>
-                <div class="star-wrapper">
-                   <!-- <i class="icon ion-ios-star fill"></i>
-                    <i class="icon ion-ios-star fill"></i>
-                    <i class="icon ion-ios-star fill"></i>
-                    <i class="icon ion-ios-star"></i>
-                    <i class="icon ion-ios-star"></i> -->
-                    <rating ng-model="rating.rate" max="rating.max"></rating>
-                </div> 
-            </div>
-        </div>
-  </ion-content>
-
-
-  <ion-content class="dashboard-background" ng-show="{{set === 3}}">
-    <div class="mood-wrapper">
-            <div class="item item-image schedule-time">
-                <img src="img/profilepic.png">
-                <div class="time-wrapper">
-                    <p class="title">Happy <!-- <span class="time">Today @ 8.28 am</span> --></p>                    
-                </div>
-            </div>
-            <div class="item item-divider mood-footer">
-                
-                <a class="btn-float" ng-click="save()">SAVE</a>
-                <h3>sleep schedule last night?</h3>
-                <ul class="wakeup-list">
-                    <li>
-                        I went to sleep 
-                        <span class="item-note" ion-datetime-picker time ng-model="timeValue1">
-                         {{timeValue1| date: "H:mm"}}
-                        </span>    
-                    </li>
-                    <li>
-                        I woke up @ 
-                        <span class="item-note" ion-datetime-picker time ng-model="timeValue2">
-                         {{timeValue2| date: "H:mm"}}
-                        </span>
-                    </li>
-                </ul>
-               
-                                
-            </div>
-        </div>
-  </ion-content>
-
-  <ion-content class="dashboard-background"  ng-show="{{TodayDate==moodSetDate}}">
-    <div class="mood-wrapper">
-            <div class="item item-image schedule-time">
-                <img src="img/profilepic.png">
-                <div class="time-wrapper">
-                    <p class="title">Happy <!-- <span class="time">Today @ 8.28 am</span> --></p>                    
-                </div>
-            </div>
-            <div class="item item-divider mood-footer">
-              <blockquote>
-                Happiness is contigious
-              </blockquote>
-                                
-            </div>
-        </div>
-  </ion-content>
+  </ion-pane>
 </ion-view>

@@ -108,6 +108,15 @@ $ionicConfigProvider.tabs.style("standard"); //Makes them all look the same acro
       }
     }
   })
+  .state('tab.moodslide', {
+    url: '/moodslide',
+    views: {
+      'tab-dash': {
+        templateUrl: 'templates/moods-slide.html',
+        controller: 'moodslideCtrl'
+      }
+    }
+  })
   .state('tab.setmood2', {
     url: '/setmood2',
     views: {

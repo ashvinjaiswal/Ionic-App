@@ -1,40 +1,29 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope,$state,UserFactory) {
-
+.controller('DashCtrl', function($scope,$state,UserFactory,$ionicSlideBoxDelegate) {
    $scope.setUserMood = function() {
-    //console.log("mood is clicked");
-    $state.go('tab.setmood');
-  };
+     $state.go('tab.moodslide');
+    };
 
-  $scope.save = function(user) {
-    $scope.set = $scope.set + 1;
+    UserFactory.user_data().success(function(data){
+      
+      $scope.moods = data.data[0].userTodayMood;
+      //var date = new Date();
+      //$scope.TodayDate = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
+      console.log($scope.moods);
 
-  };
-
-  UserFactory.user_data().success(function(data){
-    //Get the data from the api
-    $scope.userData = data.data[0];
-    console.log($scope.userData);
-    
-    $scope.moods = data.data[0].userTodayMood;
-    //console.log("length of the today mood"+data.data[0].userTodayMood.length);
-
-    $scope.moodSetDate=data.data[0].userTodayMood.mood_date;
-    $scope.moods = data.data[0].moods;
-    var date = new Date();
-    $scope.TodayDate = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
-    console.log($scope.TodayDate);
-    console.log($scope.moodSetDate);
-    $scope.set = 1;
-
-
-  }).error(function(err, statusCode) {
-      controller.log(err.message);
-  });
-
-
-
+      $scope.TodayMoodLen=data.data[0].userTodayMood;
+      if($scope.TodayMoodLen == null){
+          $scope.iconscreen=true;
+      }
+      if($scope.TodayMoodLen){
+        $scope.hasMood=true;
+        $state.go('tab.setmood'); 
+      }
+      
+    }).error(function(err, statusCode) {
+        controller.log(err.message);
+    });
 })
 
 .controller('ChallengesCtrl', function($scope,$state,UserFactory,Loader) {
@@ -407,4 +396,76 @@ angular.module('starter.controllers', [])
         });
       };
 
+})
+
+
+.controller('moodslideCtrl', function($scope, $state,UserFactory,$ionicSlideBoxDelegate) {  
+  
+  $scope.timeValue1 = new Date();
+  $scope.timeValue2 = new Date();
+  $scope.rating = {};
+  $scope.rating.rate = 0;
+  $scope.rating.max = 5;
+
+  //sotre the current object
+  $scope.currentMood ={};
+
+  
+  $scope.save = function(userMood) {
+     $scope.set = $scope.set + 1;
+
+     $scope.currentMood =userMood;
+     console.log($scope.currentMood);
+
+     //check for the final submission of the value
+     if($scope.set==4){
+      //console.log("save data");
+      var userMoodData ={
+        'mood_id':userMood.moodid,
+        'ranking':$scope.rating.rate,
+        'sleeptime':$scope.timeValue1,
+        'wakeuptime':$scope.timeValue1};
+
+        console.log(userMoodData);
+
+        UserFactory.setTodayMood(userMoodData).success(function(data){
+
+          console.log(data);
+          //$state.go($state.current, {}, {reload: true});
+          $state.go('tab.dash');
+
+        }).error(function(err, statusCode) {
+              controller.log(err.message);
+        });
+
+
+     }
+   
+    console.log($scope.set);
+  };
+
+  UserFactory.user_data().success(function(data){
+    $scope.set = 1;
+    console.log(data.data[0]);
+    console.log($scope.set);
+    $scope.moods = data.data[0].userTodayMood;
+    $scope.moodSetDate=data.data[0].userTodayMood;
+    $scope.moods = data.data[0].moods;
+    $ionicSlideBoxDelegate.update();
+    var date = new Date();
+    $scope.TodayDate = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
+    
+    $scope.TodayMoodLen=data.data[0].userTodayMood;
+    if($scope.TodayMoodLen == null && $scope.set==0){
+        $scope.iconscreen=true;
+    }
+    if($scope.TodayMoodLen){
+      $scope.hasMood=true;
+    }
+    $ionicSlideBoxDelegate.update();
+  }).error(function(err, statusCode) {
+      controller.log(err.message);
+  });
+
+  
 });

@@ -180,8 +180,10 @@ angular.module('starter.factory', [])
             },
             setUserChallenge:function(userData){
                 return $http.post(base+'/update_user_challenge',userData);
-            }
-            ,
+            },
+            setTodayMood:function(userMoodData){
+                return $http.post(base+'/user_daily_mood',userMoodData);
+            },
             logout: function() {
                 AuthFactory.deleteAuth();
             }

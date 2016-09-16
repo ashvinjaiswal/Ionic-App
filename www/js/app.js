@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','starter.factory','ngCordova'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','starter.factory','ngCordova','ionic.rating','ion-datetime-picker'])
 
 .run(function($ionicPlatform,$rootScope) {
   $ionicPlatform.ready(function() {
@@ -24,8 +24,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','s
 
   // set value for timepicker
 
-  $rootScope.timeValue1 = new Date();
-  $rootScope.timeValue2 = new Date();
+  // $rootScope.timeValue1 = new Date();
+  // $rootScope.timeValue2 = new Date();
 })
 
 .config(function($ionicConfigProvider) {

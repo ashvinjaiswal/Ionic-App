@@ -403,6 +403,8 @@ angular.module('starter.controllers', [])
   
   $scope.timeValue1 = new Date();
   $scope.timeValue2 = new Date();
+
+  console.log($scope.timeValue1);
   $scope.rating = {};
   $scope.rating.rate = 0;
   $scope.rating.max = 5;
@@ -416,7 +418,7 @@ angular.module('starter.controllers', [])
 
      $scope.currentMood =userMood;
      console.log($scope.currentMood);
-
+     
      //check for the final submission of the value
      if($scope.set==4){
       //console.log("save data");
